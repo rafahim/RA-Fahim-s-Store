@@ -14,7 +14,6 @@ function SocialIcon({ name }: { name: string }) {
 const explore: { label: string; href: string; external?: boolean }[] = [
   { label: "Home", href: "/" },
   { label: "All services", href: "/services/" },
-  { label: "Portfolio", href: site.portfolio, external: true },
   { label: "Contact", href: "/contact/" },
   { label: "Order now", href: "/order/" },
 ];
@@ -22,58 +21,38 @@ const explore: { label: string; href: string; external?: boolean }[] = [
 const FOOTER_LIMIT = 5;
 
 export default function Footer() {
-  const title = "text-[11px] font-black uppercase tracking-[.26em] text-sky-400";
-  const link = "group inline-flex items-center gap-2 text-sm font-semibold leading-snug text-slate-400 transition hover:text-white";
-  const dot = <span aria-hidden="true" className="h-px w-3 bg-sky-500/50 transition-all duration-300 group-hover:w-5 group-hover:bg-sky-400" />;
+  const title = "text-[11px] font-black uppercase tracking-[.26em] text-sky-600";
+  const link = "group inline-flex items-center gap-2 text-sm font-semibold leading-snug text-slate-500 transition hover:text-sky-600";
+  const dot = <span aria-hidden="true" className="h-px w-3 bg-sky-300 transition-all duration-300 group-hover:w-5 group-hover:bg-sky-500" />;
+  const iconBox = "grid h-9 w-9 shrink-0 place-items-center rounded-full border border-sky-100 bg-sky-50 text-sky-600 transition group-hover:border-sky-300 group-hover:bg-sky-100";
 
-  return <footer className="site-footer relative isolate mt-10 overflow-hidden rounded-t-[2rem] bg-slate-950 px-5 pb-8 pt-14 text-white sm:mt-16 sm:rounded-t-[3rem] sm:px-8 sm:pt-20 lg:px-10 print:hidden">
-    {/* Decorative background: soft sky glows and a faint grid */}
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-      <div className="absolute -left-24 -top-24 h-80 w-80 rounded-full bg-sky-500/20 blur-3xl" />
-      <div className="absolute -right-24 top-1/3 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl" />
-      <div className="absolute inset-0 opacity-[.05]" style={{ backgroundImage: "linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)", backgroundSize: "44px 44px", maskImage: "radial-gradient(ellipse at top,#000,transparent 70%)", WebkitMaskImage: "radial-gradient(ellipse at top,#000,transparent 70%)" }} />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-400/70 to-transparent" />
-    </div>
+  return <footer className="site-footer relative isolate overflow-hidden border-t border-sky-100 bg-gradient-to-b from-sky-50/70 via-white to-white px-5 pb-8 pt-12 text-slate-950 sm:px-8 sm:pt-16 lg:px-10 print:hidden">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-sky-400/60 to-transparent" />
+    <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full bg-sky-200/40 blur-3xl" />
 
     <div className="mx-auto max-w-7xl">
-      <section aria-labelledby="ft-cta-title" className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-sky-500/20 via-white/[.04] to-transparent p-6 backdrop-blur sm:p-10">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-sky-400/20 blur-3xl" />
-        <div className="relative flex flex-col items-start justify-between gap-7 lg:flex-row lg:items-center">
+      <section aria-labelledby="ft-cta-title" className="relative overflow-hidden rounded-3xl border border-sky-100 bg-gradient-to-br from-sky-50 to-white px-6 py-8 shadow-[0_20px_50px_-30px_rgba(14,165,233,.45)] sm:px-10 sm:py-10">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-sky-200/50 blur-3xl" />
+        <div className="relative flex flex-col items-start justify-between gap-7 md:flex-row md:items-center">
           <div className="max-w-xl">
-            <p className="text-[11px] font-black uppercase tracking-[.26em] text-sky-300">Let&apos;s work together</p>
-            <h2 id="ft-cta-title" className="mt-3 font-display text-3xl font-semibold leading-[1.1] text-white sm:text-4xl lg:text-5xl">Have a project <span className="bg-gradient-to-r from-sky-300 to-sky-500 bg-clip-text text-transparent">in mind?</span></h2>
-            <p className="mt-4 text-sm leading-7 text-slate-300 sm:text-base">Tell me what you need. You get a clear price and timeline before any work starts.</p>
+            <p className="text-[11px] font-black uppercase tracking-[.26em] text-sky-600">Let&apos;s work together</p>
+            <h2 id="ft-cta-title" className="mt-3 font-display text-3xl font-semibold leading-[1.1] text-slate-950 sm:text-4xl">Have a project <span className="text-sky-500">in mind?</span></h2>
+            <p className="mt-3 text-sm leading-7 text-slate-500 sm:text-base">Tell me what you need. You get a clear price and timeline before any work starts.</p>
           </div>
-          <div className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto lg:shrink-0">
-            <a href={waUrl("Hi RA Fahim, I would like to discuss a project.")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-sky-500 px-7 py-3.5 text-sm font-extrabold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5 hover:bg-sky-400">Chat on WhatsApp <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
-            <Link href="/order/" className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:border-sky-300 hover:bg-white/10">Order now</Link>
+          <div className="flex w-full flex-col gap-3 sm:flex-row md:w-auto md:shrink-0">
+            <a href={waUrl("Hi RA Fahim, I would like to discuss a project.")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-sky-500 px-7 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-sky-200 transition hover:-translate-y-0.5 hover:bg-sky-600">Chat on WhatsApp <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+            <Link href="/order/" className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-sky-100 bg-white px-7 py-3.5 text-sm font-extrabold text-slate-600 transition hover:-translate-y-0.5 hover:border-sky-300 hover:text-sky-600">Order now</Link>
           </div>
         </div>
       </section>
 
-      <div className="mt-14 grid grid-cols-2 gap-x-6 gap-y-12 md:gap-x-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-14">
+      <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 md:gap-x-10 lg:grid-cols-[1.35fr_1.1fr_.8fr_.95fr_1.2fr] lg:gap-10">
         <div className="col-span-2 lg:col-span-1">
           <Link href="/" className="inline-flex items-center gap-3 font-black tracking-tight" aria-label={`${site.name} — home`}>
-            <Image src={logo} alt="" width={48} height={48} className="h-12 w-12 rounded-full object-cover ring-2 ring-sky-400/60" />
-            <span className="text-xl">RA <span className="text-sky-400">Fahim&apos;s</span> Store</span>
+            <Image src={logo} alt="" width={48} height={48} className="h-12 w-12 rounded-full object-cover ring-2 ring-white shadow-md shadow-sky-100" />
+            <span className="text-xl">RA <span className="text-sky-500">Fahim&apos;s</span> Store</span>
           </Link>
-          <p className="mt-5 max-w-sm text-sm leading-7 text-slate-400">The digital service store of RA Fahim, a web developer from Bangladesh. Websites, domains and practical tools, with one person to talk to.</p>
-          <ul className="mt-6 space-y-3 text-sm font-semibold">
-            <li><a href={`mailto:${site.email}`} className="group inline-flex items-center gap-3 break-all text-slate-300 transition hover:text-white">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5 text-sky-400 transition group-hover:border-sky-400/60"><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span>{site.email}</a></li>
-            <li><a href={`tel:${site.phone}`} className="group inline-flex items-center gap-3 text-slate-300 transition hover:text-white">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5 text-sky-400 transition group-hover:border-sky-400/60"><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span>{site.phone}</a></li>
-          </ul>
-          <nav aria-label="Social media" className="mt-6">
-            <ul className="flex flex-wrap gap-2.5">
-              {site.socials.map(s => <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} title={s.label}
-                  className="footer-pill grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition duration-300 hover:-translate-y-1 hover:border-sky-400 hover:bg-sky-500 hover:text-white hover:shadow-lg hover:shadow-sky-500/30">
-                  <span className="block h-[18px] w-[18px] [&>svg]:h-[18px] [&>svg]:w-[18px]"><SocialIcon name={s.label} /></span>
-                </a>
-              </li>)}
-            </ul>
-          </nav>
+          <p className="mt-5 max-w-sm text-sm leading-7 text-slate-500">The digital service store of RA Fahim, a web developer from Bangladesh. Websites, domains and practical tools, with one person to talk to.</p>
         </div>
 
         <nav aria-label="Footer services" className="col-span-2 md:col-span-1">
@@ -81,7 +60,7 @@ export default function Footer() {
           <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3.5 md:grid-cols-1">
             {services.slice(0, FOOTER_LIMIT).map(s => <li key={s.slug}><Link href={`/services/${s.slug}/`} className={link}>{dot}{s.slug === "domain" ? "Buy Domain" : s.name}</Link></li>)}
             {services.length > FOOTER_LIMIT && (
-              <li><Link href="/services/" className="group inline-flex items-center gap-1.5 text-sm font-extrabold leading-snug text-sky-400 transition hover:text-sky-300">View all <span aria-hidden="true" className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span><span className="sr-only"> services</span></Link></li>
+              <li><Link href="/services/" className="group inline-flex items-center gap-1.5 text-sm font-extrabold leading-snug text-sky-600 transition hover:text-sky-700">View all <span aria-hidden="true" className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span><span className="sr-only"> services</span></Link></li>
             )}
           </ul>
         </nav>
@@ -89,9 +68,7 @@ export default function Footer() {
         <nav aria-label="Footer explore">
           <h2 className={title}>Explore</h2>
           <ul className="mt-5 space-y-3.5">
-            {explore.map(l => <li key={l.href}>{l.external
-              ? <a href={l.href} target="_blank" rel="noopener noreferrer" className={link}>{dot}{l.label} <span aria-hidden="true" className="text-sky-400">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
-              : <Link href={l.href} className={link}>{dot}{l.label}</Link>}</li>)}
+            {explore.map(l => <li key={l.href}><Link href={l.href} className={link}>{dot}{l.label}</Link></li>)}
           </ul>
         </nav>
 
@@ -103,10 +80,30 @@ export default function Footer() {
             <li><Link href="/refund/" className={link}>{dot}Refund Policy</Link></li>
           </ul>
         </nav>
+
+        <nav aria-label="Footer connect" className="col-span-2 lg:col-span-1">
+          <h2 className={title}>Connect</h2>
+          <ul className="mt-5 space-y-3.5 text-sm font-semibold">
+            <li><a href={`mailto:${site.email}`} className="group inline-flex items-center gap-3 break-all text-slate-600 transition hover:text-sky-600">
+              <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span>{site.email}</a></li>
+            <li><a href={`tel:${site.phone}`} className="group inline-flex items-center gap-3 text-slate-600 transition hover:text-sky-600">
+              <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span>{site.phone}</a></li>
+            <li><a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 text-slate-600 transition hover:text-sky-600">
+              <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3Z"/></svg></span>Portfolio <span aria-hidden="true" className="text-sky-500">↗</span><span className="sr-only"> (opens in a new tab)</span></a></li>
+          </ul>
+          <ul aria-label="Social media" className="mt-6 flex flex-wrap gap-2.5">
+            {site.socials.map(s => <li key={s.label}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} title={s.label}
+                className="footer-pill grid h-11 w-11 place-items-center rounded-full border border-sky-100 bg-white text-slate-600 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:shadow-lg hover:shadow-sky-200">
+                <span className="block h-[18px] w-[18px] [&>svg]:h-[18px] [&>svg]:w-[18px]"><SocialIcon name={s.label} /></span>
+              </a>
+            </li>)}
+          </ul>
+        </nav>
       </div>
 
-      <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs font-semibold text-slate-500 sm:flex-row sm:text-left">
-        <p>© {new Date().getFullYear()} <a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="text-slate-300 transition hover:text-sky-400">rafahim.com</a>. All rights reserved.</p>
+      <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-sky-100 pt-6 text-center text-xs font-semibold text-slate-400 sm:flex-row sm:text-left">
+        <p>© {new Date().getFullYear()} <a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="text-slate-500 transition hover:text-sky-600">rafahim.com</a>. All rights reserved.</p>
         <p className="inline-flex items-center gap-2"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />Based in Bangladesh, working online</p>
       </div>
     </div>
