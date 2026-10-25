@@ -12,7 +12,7 @@ const nav: { label: string; href: string; external?: boolean }[] = [
   { label: "Buy Domain", href: "/services/domain/" },
   { label: "Extensions", href: "/services/browser-extensions/" },
   { label: "Dollar", href: "/services/dollar-buy-sell/" },
-  { label: "Portfolio", href: site.portfolio, external: true },
+  { label: "Portfolio", href: "/portfolio/" },
   { label: "Contact", href: "/contact/" },
 ];
 

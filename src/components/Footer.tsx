@@ -18,11 +18,11 @@ const explore: { label: string; href: string; external?: boolean }[] = [
   { label: "Order now", href: "/order/" },
 ];
 
-const FOOTER_LIMIT = 5;
+const FOOTER_LIMIT = 3;
 
 export default function Footer() {
   const title = "text-[11px] font-black uppercase tracking-[.26em] text-sky-600";
-  const link = "group inline-flex items-center gap-2 text-sm font-semibold leading-snug text-slate-500 transition hover:text-sky-600";
+  const link = "group inline-flex items-center gap-2 text-[15px] font-semibold leading-snug text-slate-700 transition hover:text-sky-600";
   const dot = <span aria-hidden="true" className="h-px w-3 bg-sky-300 transition-all duration-300 group-hover:w-5 group-hover:bg-sky-500" />;
   const iconBox = "grid h-9 w-9 shrink-0 place-items-center rounded-full border border-sky-100 bg-sky-50 text-sky-600 transition group-hover:border-sky-300 group-hover:bg-sky-100";
 
@@ -37,7 +37,7 @@ export default function Footer() {
           <div className="max-w-xl">
             <p className="text-[11px] font-black uppercase tracking-[.26em] text-sky-600">Let&apos;s work together</p>
             <h2 id="ft-cta-title" className="mt-3 font-display text-3xl font-semibold leading-[1.1] text-slate-950 sm:text-4xl">Have a project <span className="text-sky-500">in mind?</span></h2>
-            <p className="mt-3 text-sm leading-7 text-slate-500 sm:text-base">Tell me what you need. You get a clear price and timeline before any work starts.</p>
+            <p className="mt-3 text-[15px] leading-7 text-slate-700 sm:text-base">Tell me what you need. You get a clear price and timeline before any work starts.</p>
           </div>
           <div className="flex w-full flex-col gap-3 sm:flex-row md:w-auto md:shrink-0">
             <a href={waUrl("Hi RA Fahim, I would like to discuss a project.")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-sky-500 px-7 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-sky-200 transition hover:-translate-y-0.5 hover:bg-sky-600">Chat on WhatsApp <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
@@ -52,7 +52,7 @@ export default function Footer() {
             <Image src={logo} alt="" width={48} height={48} className="h-12 w-12 rounded-full object-cover ring-2 ring-white shadow-md shadow-sky-100" />
             <span className="text-xl">RA <span className="text-sky-500">Fahim&apos;s</span> Store</span>
           </Link>
-          <p className="mt-5 max-w-sm text-sm leading-7 text-slate-500">The digital service store of RA Fahim, a web developer from Bangladesh. Websites, domains and practical tools, with one person to talk to.</p>
+          <p className="mt-5 max-w-sm text-[15px] leading-7 text-slate-700">The digital service store of RA Fahim, a web developer from Bangladesh. Websites, domains and practical tools, with one person to talk to.</p>
           <ul aria-label="Social media" className="mt-6 flex flex-wrap gap-2.5">
             {site.socials.map(s => <li key={s.label}>
               <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} title={s.label}
@@ -68,7 +68,7 @@ export default function Footer() {
           <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3.5 md:grid-cols-1">
             {services.slice(0, FOOTER_LIMIT).map(s => <li key={s.slug}><Link href={`/services/${s.slug}/`} className={link}>{dot}{s.slug === "domain" ? "Buy Domain" : s.name}</Link></li>)}
             {services.length > FOOTER_LIMIT && (
-              <li><Link href="/services/" className="group inline-flex items-center gap-1.5 text-sm font-extrabold leading-snug text-sky-600 transition hover:text-sky-700">View all <span aria-hidden="true" className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span><span className="sr-only"> services</span></Link></li>
+              <li><Link href="/services/" className="group inline-flex items-center gap-1.5 text-[15px] font-extrabold leading-snug text-sky-700 transition hover:text-sky-800">More services <span aria-hidden="true" className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span></Link></li>
             )}
           </ul>
         </nav>
@@ -92,18 +92,18 @@ export default function Footer() {
         <nav aria-label="Footer connect" className="col-span-2 lg:col-span-1">
           <h2 className={title}>Connect</h2>
           <ul className="mt-5 space-y-3.5 text-sm font-semibold">
-            <li><a href={`mailto:${site.email}`} className="group inline-flex items-center gap-3 break-all text-slate-600 transition hover:text-sky-600">
+            <li><a href={`mailto:${site.email}`} className="group inline-flex items-center gap-3 break-all text-slate-700 transition hover:text-sky-600">
               <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span>{site.email}</a></li>
-            <li><a href={`tel:${site.phone}`} className="group inline-flex items-center gap-3 text-slate-600 transition hover:text-sky-600">
+            <li><a href={`tel:${site.phone}`} className="group inline-flex items-center gap-3 text-slate-700 transition hover:text-sky-600">
               <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span>{site.phone}</a></li>
-            <li><a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 text-slate-600 transition hover:text-sky-600">
+            <li><a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 text-slate-700 transition hover:text-sky-600">
               <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3Z"/></svg></span>Portfolio <span aria-hidden="true" className="text-sky-500">↗</span><span className="sr-only"> (opens in a new tab)</span></a></li>
           </ul>
         </nav>
       </div>
 
-      <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-sky-100 pt-6 text-center text-xs font-semibold text-slate-400 sm:flex-row sm:text-left">
-        <p>© {new Date().getFullYear()} <a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="text-slate-500 transition hover:text-sky-600">rafahim.com</a>. All rights reserved.</p>
+      <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-sky-100 pt-6 text-center text-[13px] font-semibold text-slate-600 sm:flex-row sm:text-left">
+        <p>© {new Date().getFullYear()} <a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="text-slate-600 transition hover:text-sky-600">rafahim.com</a>. All rights reserved.</p>
         <p className="inline-flex items-center gap-2"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />Based in Bangladesh, working online</p>
       </div>
     </div>

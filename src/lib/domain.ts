@@ -21,3 +21,20 @@ export async function checkDomain(d: string): Promise<DomainStatus> {
 }
 
 export const altExtensions = [".net", ".org", ".co", ".xyz", ".online", ".store"];
+
+export const popularExtensions = [".com", ".net", ".org", ".co", ".xyz", ".online"];
+
+/** Names worth checking next to the one the visitor searched: other extensions first, then a few common variations. */
+export function suggestionNames(d: string): string[] {
+  const dot = d.indexOf(".");
+  const base = dot > 0 ? d.slice(0, dot) : d;
+  const tld = dot > 0 ? d.slice(dot) : "";
+  const tlds = [".com", ".net", ".org", ".co", ".xyz", ".online", ".store"].filter((x) => x !== tld).slice(0, 5).map((x) => base + x);
+  const variants = [
+    !base.startsWith("get") && `get${base}.com`,
+    !base.endsWith("bd") && `${base}bd.com`,
+    !base.startsWith("my") && `my${base}.com`,
+    !base.endsWith("online") && `${base}online.com`,
+  ].filter((x): x is string => !!x && x.length <= 70).slice(0, 3);
+  return [...new Set([...tlds, ...variants])].filter((x) => x !== d);
+}

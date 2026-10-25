@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DollarDesk from "@/components/DollarDesk";
+import DomainJump from "@/components/DomainJump";
 import DomainSearch from "@/components/DomainSearch";
+import FreeSubdomain from "@/components/FreeSubdomain";
 import Illustration from "@/components/Illustration";
 import OrderButton from "@/components/OrderButton";
 import ServiceCard from "@/components/ServiceCard";
@@ -49,7 +51,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted">{s.intro}</p>
             <p className="mt-6 font-display text-3xl font-semibold">{priceLabel(s)}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <OrderButton subject={s.name} className="btn px-7 py-3">Order now</OrderButton>
+              {s.slug === "domain"
+                ? <><DomainJump className="btn px-7 py-3">Search domain</DomainJump><a href="#free-subdomain" className="btn-ghost px-7 py-3">Get free subdomain</a></>
+                : <OrderButton subject={s.name} className="btn px-7 py-3">Order now</OrderButton>}
               <a href={waUrl(`Hi RA Fahim, I have a question about ${s.name}.`)} target="_blank" rel="noopener noreferrer" className="btn-ghost px-7 py-3">
                 Ask a question
               </a>
@@ -66,6 +70,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <DomainSearch />
         </section>
       )}
+
+      {s.slug === "domain" && <FreeSubdomain />}
 
       {s.slug === "dollar-buy-sell" && (
         <section className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 pt-20">
@@ -170,11 +176,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="px-5 pb-20">
         <div className="mx-auto max-w-7xl contact-panel text-white">
           <h2 className="font-display text-3xl font-semibold md:text-4xl">Ready to start with {s.name.toLowerCase()}?</h2>
-          <p className="mt-3 max-w-xl text-sky-50">Send your details and you get a clear price and timeline on WhatsApp.</p>
+          <p className="mt-3 max-w-xl text-sky-50">{s.slug === "domain" ? "Search your name first. If it is available, press Buy now and you get a clear price on WhatsApp." : "Send your details and you get a clear price and timeline on WhatsApp."}</p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <OrderButton subject={s.name} className="btn">
-              Order now
-            </OrderButton>
+            {s.slug === "domain"
+              ? <DomainJump className="btn">Search domain</DomainJump>
+              : <OrderButton subject={s.name} className="btn">Order now</OrderButton>}
             <a href={waUrl(`Hi RA Fahim, I want to know more about ${s.name}.`)} target="_blank" rel="noopener noreferrer"
               className="contact-secondary">
               Chat on WhatsApp
