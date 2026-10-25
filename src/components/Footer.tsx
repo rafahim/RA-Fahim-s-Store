@@ -63,9 +63,9 @@ export default function Footer() {
           </ul>
         </div>
 
-        <nav aria-label="Footer services" className="col-span-2 md:col-span-1">
+        <nav aria-label="Footer services">
           <h2 className={title}>Services</h2>
-          <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3.5 md:grid-cols-1">
+          <ul className="mt-5 space-y-3.5">
             {services.slice(0, FOOTER_LIMIT).map(s => <li key={s.slug}><Link href={`/services/${s.slug}/`} className={link}>{dot}{s.slug === "domain" ? "Buy Domain" : s.name}</Link></li>)}
             {services.length > FOOTER_LIMIT && (
               <li><Link href="/services/" className="group inline-flex items-center gap-1.5 text-[15px] font-extrabold leading-snug text-sky-700 transition hover:text-sky-800">More services <span aria-hidden="true" className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span></Link></li>
@@ -89,9 +89,9 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <nav aria-label="Footer connect" className="col-span-2 lg:col-span-1">
+        <nav aria-label="Footer connect">
           <h2 className={title}>Connect</h2>
-          <ul className="mt-5 space-y-3.5 text-sm font-semibold">
+          <ul className="mt-5 space-y-3.5 text-[13px] font-semibold sm:text-sm">
             <li><a href={`mailto:${site.email}`} className="group inline-flex items-center gap-3 break-all text-slate-700 transition hover:text-sky-600">
               <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span>{site.email}</a></li>
             <li><a href={`tel:${site.phone}`} className="group inline-flex items-center gap-3 text-slate-700 transition hover:text-sky-600">

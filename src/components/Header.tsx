@@ -41,13 +41,14 @@ export default function Header() {
     document.addEventListener("focusin", focus);
     return () => {window.removeEventListener("keydown",key);document.removeEventListener("pointerdown",outside);document.removeEventListener("focusin",focus);};
   }, [menu]);
-  // Freeze the page under the open menu and restore the exact scroll position (same as the portfolio).
+  // Lock page scroll while the menu is open. Do NOT make the body position:fixed: that moves the sticky header (and the X button) off screen when the page is scrolled.
   useEffect(() => {
     if (!menu) return;
-    const scrollY = window.scrollY;
-    const html = document.documentElement, body = document.body;
-    html.style.overflow = "hidden"; body.style.overflow = "hidden"; body.style.position = "fixed"; body.style.top = `-${scrollY}px`; body.style.width = "100%";
-    return () => { html.style.overflow = ""; body.style.overflow = ""; body.style.position = ""; body.style.top = ""; body.style.width = ""; window.scrollTo(0, scrollY); };
+    // Only <html>: if <body> also gets overflow:hidden it becomes its own scroll box and the sticky header slides away.
+    const html = document.documentElement;
+    const prev = html.style.overflow;
+    html.style.overflow = "hidden";
+    return () => { html.style.overflow = prev; };
   }, [menu]);
 
 
