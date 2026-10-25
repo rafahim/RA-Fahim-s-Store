@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
-import { projects, site } from "@/data/site";
+import { site } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 import { waUrl } from "@/lib/whatsapp";
 
@@ -61,27 +61,15 @@ export default function ContactPage() {
       </section>
 
       <section className="ct-work" aria-labelledby="ct-work-title">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 py-20">
-          <div className="section-heading">
-            <div><h2 id="ct-work-title">Projects I have built</h2></div>
-            <p>Real products I designed and developed. Open any of them to see how it works.</p>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-5 sm:px-8 lg:px-10 py-16">
+          <div>
+            <h2 id="ct-work-title" className="font-display text-3xl font-semibold md:text-4xl">See my work and CV</h2>
+            <p className="mt-3 max-w-xl leading-relaxed text-muted">Open my full portfolio on rafahim.com to see my projects, articles, services and CV.</p>
           </div>
-          <ul className="ct-projects">
-            {projects.map((p) => (
-              <li key={p.name}>
-                <div className="ct-proj-main">
-                  <span className="ct-proj-cat">{p.category}</span>
-                  <h3>{p.name}</h3>
-                  <p>{p.text}</p>
-                </div>
-                <div className="ct-proj-side">
-                  <ul aria-label={`${p.name} technologies`}>{p.stack.map((t) => <li key={t}>{t}</li>)}</ul>
-                  <a href={p.href} target="_blank" rel="noopener noreferrer">Visit project <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <p className="ct-more">There is more on <a href={site.portfolio} target="_blank" rel="noopener noreferrer">rafahim.com <span aria-hidden="true">↗</span></a>, including articles, services and my CV.</p>
+          <div className="flex flex-wrap gap-3">
+            <a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="btn">Visit portfolio <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+            <a href={site.cv} target="_blank" rel="noopener noreferrer" className="btn-ghost">View CV <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+          </div>
         </div>
       </section>
     </main>

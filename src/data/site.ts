@@ -7,6 +7,7 @@ export const site = {
   email: "dev@rafahim.com",
   phone: "+8801576964319",
   portfolio: "https://rafahim.com",
+  cv: "https://rafahim.com/cv",
   /** Free subdomains are given under this domain, e.g. yourname.sites.bd */
   subdomainBase: "sites.bd",
   credit: "https://facebook.com/rafahimn",
