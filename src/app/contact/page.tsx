@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import logo from "@/assets/logo.webp";
 import ContactForm from "@/components/ContactForm";
 import { site } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
@@ -60,13 +62,15 @@ export default function ContactPage() {
         <ContactForm />
       </section>
 
-      <section className="ct-work" aria-labelledby="ct-work-title">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 px-5 sm:px-8 lg:px-10 py-16">
-          <div>
-            <h2 id="ct-work-title" className="font-display text-3xl font-semibold md:text-4xl">See my work and CV</h2>
-            <p className="mt-3 max-w-xl leading-relaxed text-muted">Open my full portfolio on rafahim.com to see my projects, articles, services and CV.</p>
+      <section className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 pb-20" aria-labelledby="ct-work-title">
+        <div className="ct-badge">
+          <Image src={logo} alt="" width={84} height={84} className="ct-badge-avatar" />
+          <div className="ct-badge-text">
+            <span className="ct-badge-pill"><i aria-hidden="true" />Portfolio &amp; CV</span>
+            <h2 id="ct-work-title">See my work and CV</h2>
+            <p>Projects, articles, services and my CV, all on rafahim.com.</p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="ct-badge-actions">
             <a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="btn">Visit portfolio <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
             <a href={site.cv} target="_blank" rel="noopener noreferrer" className="btn-ghost">View CV <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
           </div>

@@ -14,14 +14,14 @@ export function sitePageUrl(path: string): string | undefined {
   const origin = publicSiteUrl();
   return origin ? `${origin}/${path.replace(/^\//, "")}` : undefined;
 }
-export const storeDescription = "RA Fahim’s Store is the digital service store by RA Fahim, a web developer from Bangladesh and creator of rafahim.com. Websites, domains, hosting and more.";
-export const storeTitle = "RA Fahim’s Store | Web Developer RA Fahim’s Digital Services";
+export const storeDescription = "RA Fahim’s Store is the official store of rafahim.com, by RA Fahim, a web developer from Bangladesh. Websites, domains, hosting, free subdomains and more.";
+export const storeTitle = "RA Fahim’s Store | rafahim.com Digital Services by RA Fahim";
 export const isPreview = process.env.VERCEL_ENV === "preview" || process.env.CONTEXT === "deploy-preview";
 
 export function pageMetadata(title: string, description: string, path: string): Metadata {
   const url = sitePageUrl(path);
   const image = sitePageUrl("/og-image.png");
-  const fullTitle = `${title} | RA Fahim’s Store`;
+  const fullTitle = `${title} | RA Fahim’s Store (rafahim.com)`;
   return {
     title, description,
     ...(url ? { alternates: { canonical: url } } : {}),
@@ -34,7 +34,7 @@ export function jsonLd(value: unknown): string { return JSON.stringify(value).re
 export function identitySchema() {
   const url=publicSiteUrl();
   const person={"@type":"Person","@id":"https://rafahim.com/#ra-fahim",name:"RA Fahim",url:site.portfolio,jobTitle:"Web Developer & Creator",sameAs:site.socials.map(s=>s.href)};
-  const organization={"@type":"Organization",...(url?{"@id":`${url}/#store`,url:`${url}/`,logo:sitePageUrl('/brand-logo.png')}:{"@id":"#store"}),name:site.name,alternateName:["RA Fahim Store","RA Fahim Developer Store"],description:storeDescription,founder:{"@id":person["@id"]},contactPoint:{"@type":"ContactPoint",telephone:`+${site.whatsapp}`,contactType:"customer service",availableLanguage:["English","Bengali"]}};
+  const organization={"@type":"Organization",...(url?{"@id":`${url}/#store`,url:`${url}/`,logo:sitePageUrl('/brand-logo.png')}:{"@id":"#store"}),name:site.name,sameAs:[site.portfolio],alternateName:["RA Fahim Store","RA Fahim Developer Store","rafahim.com store","rafahim store"],description:storeDescription,founder:{"@id":person["@id"]},contactPoint:{"@type":"ContactPoint",telephone:`+${site.whatsapp}`,contactType:"customer service",availableLanguage:["English","Bengali"]}};
   const website={"@type":"WebSite",...(url?{"@id":`${url}/#website`,url:`${url}/`}:{"@id":"#website"}),name:site.name,alternateName:"RA Fahim Developer Store",description:storeDescription,inLanguage:"en",publisher:{"@id":organization["@id"]},creator:{"@id":person["@id"]},isPartOf:{"@type":"WebSite","@id":"https://rafahim.com/#website",url:site.portfolio,name:"rafahim.com"}};
   return {"@context":"https://schema.org","@graph":[person,organization,website]};
 }

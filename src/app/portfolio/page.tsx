@@ -5,7 +5,7 @@ import { projects, site } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 import { waUrl } from "@/lib/whatsapp";
 
-export const metadata: Metadata = pageMetadata("Portfolio", "Portfolio of RA Fahim, a web developer from Bangladesh: projects built, technologies, services and ways to get in touch.", "/portfolio/");
+export const metadata: Metadata = pageMetadata("Portfolio", "Portfolio of RA Fahim, a web developer from Bangladesh: selected projects like SITES.BD, Elite Global and Wishly, and ways to get in touch.", "/portfolio/");
 
 const preview = Object.fromEntries(site.built.filter((b) => b.image).map((b) => [b.name, b.image!]));
 const shown = site.built.map((b) => projects.find((p) => p.name === b.name)!).filter(Boolean);

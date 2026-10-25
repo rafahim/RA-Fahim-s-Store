@@ -15,11 +15,11 @@ const home = pageMetadata("Home", storeDescription, "/");
 export const metadata: Metadata = {
   ...home,
   ...(origin ? {metadataBase:new URL(`${origin}/`)} : {}),
-  title:{ default:storeTitle,template:"%s | RA Fahim’s Store" },
+  title:{ default:storeTitle,template:"%s | RA Fahim’s Store (rafahim.com)" },
   applicationName:site.name,
   authors:[{name:"RA Fahim",url:site.portfolio}],
   creator:"RA Fahim",publisher:site.name,
-  keywords:["RA Fahim Store","RA Fahim’s Store","RA Fahim developer store","rafahim.com","web developer Bangladesh","custom website development","WordPress website services","domain and hosting"],
+  keywords:["RA Fahim Store","RA Fahim’s Store","RA Fahim developer store","rafahim.com","rafahim.com store","rafahim store","RA Fahim rafahim.com","web developer Bangladesh","custom website development","WordPress website services","domain and hosting"],
   category:"Web development and digital services",
   robots:{index:!isPreview,follow:true},
   openGraph:{...home.openGraph,title:storeTitle},

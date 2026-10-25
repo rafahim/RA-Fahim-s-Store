@@ -336,3 +336,14 @@ body{line-height:1.6}
 .pf-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:1023px){.pf-grid-3{grid-template-columns:1fr}}
 .sub-info{align-items:center}.sub-cta{display:grid;justify-items:center;gap:12px;padding:32px;border:1px solid var(--line);border-radius:22px;background:#fff;text-align:center}.sub-cta p{font-size:13px;color:var(--muted)}
+/* Contact page: portfolio & CV badge */
+.ct-badge{position:relative;isolation:isolate;display:flex;flex-wrap:wrap;align-items:center;gap:24px 28px;padding:28px 32px;overflow:hidden;border:1px solid #bae6fd;border-radius:28px;background:radial-gradient(420px 220px at 0% 0%,#e0f2fe,transparent 70%),linear-gradient(135deg,#f0f9ff,#fff 60%);box-shadow:0 30px 60px -36px #0284c7aa,inset 0 1px 0 #fff}
+.ct-badge::after{content:"";position:absolute;z-index:-1;right:-70px;top:-70px;width:220px;height:220px;border-radius:50%;background:#bae6fd80;filter:blur(40px)}
+.ct-badge-avatar{width:84px;height:84px;flex-shrink:0;border-radius:50%;object-fit:cover;box-shadow:0 0 0 4px #fff,0 0 0 6px #7dd3fc,0 14px 30px -10px #0284c7aa}
+.ct-badge-text{flex:1 1 260px;min-width:0}
+.ct-badge-pill{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:1px solid #bae6fd;border-radius:999px;background:#fff;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#0369a1}
+.ct-badge-pill i{width:7px;height:7px;border-radius:50%;background:#0ea5e9;box-shadow:0 0 0 3px #bae6fd}
+.ct-badge h2{margin-top:10px;font-family:"Bricolage Grotesque Variable",sans-serif;font-size:28px;font-weight:600;line-height:1.15}
+.ct-badge p{margin-top:6px;font-size:15px;line-height:1.6;color:var(--muted)}
+.ct-badge-actions{display:flex;flex-wrap:wrap;gap:10px}
+@media(max-width:639px){.ct-badge{padding:24px 20px;border-radius:24px}.ct-badge-actions,.ct-badge-actions>*{width:100%}.ct-badge h2{font-size:24px}}
