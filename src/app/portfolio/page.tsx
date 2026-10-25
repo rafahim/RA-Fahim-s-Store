@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import logo from "@/assets/logo.webp";
 import WebsitePreview from "@/components/WebsitePreview";
 import Link from "next/link";
 import { projects, site } from "@/data/site";
@@ -15,13 +17,20 @@ export default function PortfolioPage() {
   return (
     <main id="main-content">
       <section className="hero-glow">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 py-14 md:py-20">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:px-10 py-14 md:py-20 lg:grid-cols-[1.25fr_.75fr]">
+          <div>
           <p className="text-sm font-semibold text-strong">Portfolio</p>
           <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.08] tracking-tight md:text-6xl">RA Fahim<br />Web developer from Bangladesh.</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">I design and build websites, web apps, stores and management systems, and I look after the domain, hosting and launch too. Here is a look at what I have made and how to reach me.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="btn">Go to full portfolio{ext("rafahim.com")}</a>
             <a href={waUrl("Hi RA Fahim, I saw your portfolio and would like to talk about a project.")} target="_blank" rel="noopener noreferrer" className="btn-ghost">Chat on WhatsApp{ext("")}</a>
+          </div>
+          </div>
+          <div className="pf-logo" aria-hidden="true">
+            <span className="pf-logo-ring" />
+            <Image src={logo} alt="" width={360} height={360} priority className="pf-logo-img" />
+            <span className="pf-logo-chip">Code · Create · Explore</span>
           </div>
         </div>
       </section>

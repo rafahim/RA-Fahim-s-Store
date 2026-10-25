@@ -347,3 +347,12 @@ body{line-height:1.6}
 .ct-badge p{margin-top:6px;font-size:15px;line-height:1.6;color:var(--muted)}
 .ct-badge-actions{display:flex;flex-wrap:wrap;gap:10px}
 @media(max-width:639px){.ct-badge{padding:24px 20px;border-radius:24px}.ct-badge-actions,.ct-badge-actions>*{width:100%}.ct-badge h2{font-size:24px}}
+/* Portfolio hero logo */
+.pf-logo{position:relative;display:grid;place-items:center;justify-self:center;width:min(100%,380px);aspect-ratio:1}
+.pf-logo::before{content:"";position:absolute;inset:6%;border-radius:50%;background:radial-gradient(circle,#7dd3fc99,transparent 70%);filter:blur(34px)}
+.pf-logo-ring{position:absolute;inset:0;border-radius:50%;border:1.5px dashed #7dd3fc;animation:pf-spin 40s linear infinite}
+.pf-logo-img{position:relative;width:82%;height:82%;border-radius:50%;object-fit:cover;box-shadow:0 0 0 6px #fff,0 0 0 8px #bae6fd,0 36px 70px -26px #0284c7cc}
+.pf-logo-chip{position:absolute;bottom:2%;left:50%;transform:translateX(-50%);padding:8px 16px;border:1px solid #bae6fd;border-radius:999px;background:#fff;box-shadow:0 14px 30px -16px #0284c799;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0369a1;white-space:nowrap}
+@keyframes pf-spin{to{transform:rotate(360deg)}}
+@media(max-width:1023px){.pf-logo{order:-1;width:min(70%,240px)}}
+@media(prefers-reduced-motion:reduce){.pf-logo-ring{animation:none}}
