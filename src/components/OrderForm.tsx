@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { priceLabel, services } from "@/data/site";
 import { GENERAL, orderConfig, parseTopic, serviceLabel, servicePrice, timelineOptions } from "@/lib/order";
 import { waUrl } from "@/lib/whatsapp";
+import DomainSearch from "./DomainSearch";
+import type { DomainStatus } from "@/lib/domain";
 
 const choices = [
   ...services.map((s) => ({ slug: s.slug, name: s.slug === "domain" ? "Buy domain" : s.name, note: priceLabel(s) })),
@@ -20,23 +22,28 @@ export default function OrderForm() {
   const [budget, setBudget] = useState("");
   const [notes, setNotes] = useState("");
   const [person, setPerson] = useState({ name: "", phone: "", email: "" });
+  const [domStatus, setDomStatus] = useState<DomainStatus | "">("");
   const [error, setError] = useState("");
   const [sent, setSent] = useState<{ ref: string; url: string } | null>(null);
 
+  // Opening the page from a "Buy now" button keeps the old scroll position, so start at the top.
+  useEffect(() => { window.scrollTo({ top: 0 }); }, []);
+
   const cfg = orderConfig[slug];
   const set = (key: string, value: string) => setValues((v) => ({ ...v, [key]: value }));
-  const pick = (next: string) => { setSlug(next); setValues(next === start.slug ? start.values : {}); setError(""); };
+  const pick = (next: string) => { setSlug(next); setValues(next === start.slug ? start.values : {}); setDomStatus(""); setError(""); };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const digits = person.phone.replace(/\D/g, "");
     if (digits.length < 7) return setError("Enter a phone or WhatsApp number we can reach, with at least 7 digits.");
-    for (const f of cfg.fields) if (f.required && !(values[f.key] ?? "").trim()) return setError(`Please fill in “${f.label}”.`);
+    for (const f of cfg.fields) if (f.required && !(values[f.key] ?? "").trim()) return setError(f.key === "Domain wanted" && slug === "domain" ? "Search for your domain above, then press Buy now to add it to your order." : `Please fill in “${f.label}”.`);
     if (cfg.notesRequired && !notes.trim()) return setError("Tell me a little about your project.");
     const ref = `RF-${Date.now().toString(36).slice(-5).toUpperCase()}`;
     const lines = [`*New order: ${serviceLabel(slug)}*`, `Order ref: ${ref}`, `Starting price: ${servicePrice(slug)}`, "", "*Customer*", `Name: ${person.name.trim()}`, `Phone: ${person.phone.trim()}`];
     if (person.email.trim()) lines.push(`Email: ${person.email.trim()}`);
     const detail = cfg.fields.filter((f) => (values[f.key] ?? "").trim()).map((f) => `${f.key}: ${values[f.key].trim()}`);
+    if (slug === "domain" && domStatus) detail.push(`Availability: ${domStatus === "free" ? "Available when checked on the site" : "Could not be checked, please confirm"}`);
     if (cfg.timeline && timeline) detail.push(`Needed: ${timeline}`);
     if (cfg.budget && budget.trim()) detail.push(`Budget: ${budget.trim()}`);
     if (detail.length) lines.push("", "*Details*", ...detail);
@@ -78,8 +85,9 @@ export default function OrderForm() {
 
         <fieldset className="ord-step">
           <legend><span className="ord-n">2</span>Project details</legend>
-          <div className="ord-fields">
-            {cfg.fields.map((f) => (
+          {slug === "domain" && <DomainSearch key="order-domain" initial={start.slug === "domain" ? start.values["Domain wanted"] : undefined} selected={values["Domain wanted"]} onResult={(d, st) => { if (d === values["Domain wanted"]) setDomStatus(st); }} onSelect={(d, st) => { set("Domain wanted", d); setDomStatus(st); setError(""); }} />}
+          <div className="ord-fields" style={slug === "domain" ? { marginTop: 24 } : undefined}>
+            {cfg.fields.filter((f) => !(slug === "domain" && f.key === "Domain wanted")).map((f) => (
               <label key={f.key} className={`ord-field ${f.type === "textarea" ? "ord-wide" : ""}`}>
                 <span>{f.label}{f.required && <i aria-hidden="true"> *</i>}</span>
                 {f.type === "select" ? (
@@ -131,6 +139,7 @@ export default function OrderForm() {
         <h2>Your order</h2>
         <dl>
           <div><dt>Service</dt><dd>{serviceLabel(slug)}</dd></div>
+          {slug === "domain" && <div><dt>Domain</dt><dd>{values["Domain wanted"] || "Not chosen yet"}</dd></div>}
           <div><dt>Price</dt><dd>{servicePrice(slug)}</dd></div>
           <div><dt>Payment</dt><dd>Nothing to pay on this site</dd></div>
         </dl>
@@ -139,7 +148,7 @@ export default function OrderForm() {
           <li><b>Confirm the plan.</b> I reply with the final price and timeline.</li>
           <li><b>Work starts</b> once you agree and the payment is arranged.</li>
         </ol>
-        <button form="order-form" className="btn w-full">Send order on WhatsApp</button>
+        <button form="order-form" className="btn w-full">{slug === "domain" ? "Send domain order on WhatsApp" : "Send order on WhatsApp"}</button>
         <p className="ord-fine">Prices marked “from” are starting prices. Read the <Link href="/terms/">terms</Link> and <Link href="/refund/">refund policy</Link>.</p>
       </aside>
     </div>

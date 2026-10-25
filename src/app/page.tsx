@@ -7,7 +7,7 @@ import WebsitePreview from "@/components/WebsitePreview";
 import OrderButton from "@/components/OrderButton";
 import { services, site } from "@/data/site";
 import { waUrl } from "@/lib/whatsapp";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 
 export const metadata: Metadata = { ...pageMetadata("Home",storeDescription,"/"), title:{absolute:storeTitle},openGraph:{...pageMetadata("Home",storeDescription,"/").openGraph,title:storeTitle},twitter:{...pageMetadata("Home",storeDescription,"/").twitter,title:storeTitle} };
 

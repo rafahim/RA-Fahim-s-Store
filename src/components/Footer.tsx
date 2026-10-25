@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { services, site } from "@/data/site";
 import { waUrl } from "@/lib/whatsapp";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 
 function SocialIcon({ name }: { name: string }) {
   if (name === "Instagram") return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>;
@@ -53,6 +53,14 @@ export default function Footer() {
             <span className="text-xl">RA <span className="text-sky-500">Fahim&apos;s</span> Store</span>
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-7 text-slate-500">The digital service store of RA Fahim, a web developer from Bangladesh. Websites, domains and practical tools, with one person to talk to.</p>
+          <ul aria-label="Social media" className="mt-6 flex flex-wrap gap-2.5">
+            {site.socials.map(s => <li key={s.label}>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} title={s.label}
+                className="footer-pill grid h-11 w-11 place-items-center rounded-full border border-sky-100 bg-white text-slate-600 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:shadow-lg hover:shadow-sky-200">
+                <span className="block h-[18px] w-[18px] [&>svg]:h-[18px] [&>svg]:w-[18px]"><SocialIcon name={s.label} /></span>
+              </a>
+            </li>)}
+          </ul>
         </div>
 
         <nav aria-label="Footer services" className="col-span-2 md:col-span-1">
@@ -90,14 +98,6 @@ export default function Footer() {
               <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span>{site.phone}</a></li>
             <li><a href={site.portfolio} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-3 text-slate-600 transition hover:text-sky-600">
               <span className={iconBox}><svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3Z"/></svg></span>Portfolio <span aria-hidden="true" className="text-sky-500">↗</span><span className="sr-only"> (opens in a new tab)</span></a></li>
-          </ul>
-          <ul aria-label="Social media" className="mt-6 flex flex-wrap gap-2.5">
-            {site.socials.map(s => <li key={s.label}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} title={s.label}
-                className="footer-pill grid h-11 w-11 place-items-center rounded-full border border-sky-100 bg-white text-slate-600 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-500 hover:bg-sky-500 hover:text-white hover:shadow-lg hover:shadow-sky-200">
-                <span className="block h-[18px] w-[18px] [&>svg]:h-[18px] [&>svg]:w-[18px]"><SocialIcon name={s.label} /></span>
-              </a>
-            </li>)}
           </ul>
         </nav>
       </div>

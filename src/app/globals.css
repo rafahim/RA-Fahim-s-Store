@@ -244,3 +244,21 @@ header.glass{background:#ffffffd9;backdrop-filter:blur(20px) saturate(1.4);borde
 .store-menu-note{margin-top:4px;border-top:1px solid #f0f9ff;padding:12px 16px;font-size:10px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:#0ea5e9;opacity:0;transition:opacity .2s}
 .store-menu.is-open .store-menu-note{opacity:1;transition-delay:.16s}
 @media(min-width:1024px){.store-menu,.store-menu-overlay{display:none}}
+
+.dom-result{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:0 18px 40px -30px #0284c760;animation:appear .4s ease-out both}
+.dom-body{flex:1 1 220px;min-width:0}
+.dom-name{font-family:"Bricolage Grotesque Variable",system-ui,sans-serif;font-size:20px;font-weight:700;line-height:1.2;color:var(--text);overflow-wrap:anywhere}
+.dom-note{margin-top:4px;font-size:13.5px;line-height:1.6;color:var(--muted)}
+.dom-mark{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:14px;font-size:18px;font-weight:800}
+.dom-mark svg{width:20px;height:20px}
+.dom-free{border-color:#a7f3d0;background:linear-gradient(135deg,#ecfdf5,#fff 60%)}
+.dom-free .dom-mark{background:#d1fae5;color:#047857}
+.dom-taken{border-color:#fecaca;background:linear-gradient(135deg,#fef2f2,#fff 60%)}
+.dom-taken .dom-mark{background:#fee2e2;color:#b91c1c}
+.dom-unknown .dom-mark{background:#e0f2fe;color:#0369a1}
+.dom-actions{display:flex;flex-wrap:wrap;gap:10px}
+.dom-chip{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;background:#d1fae5;font-size:13px;font-weight:800;color:#047857}
+.dom-alts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.dom-alts button{min-height:36px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px;font-weight:700;color:#0369a1;transition:border-color .2s,background .2s,transform .2s}
+.dom-alts button:hover{border-color:#0ea5e9;background:#f0f9ff;transform:translateY(-1px)}
+@media(max-width:640px){.dom-result{padding:16px}.dom-result>.btn,.dom-actions,.dom-actions>*{width:100%}.dom-chip{width:100%;justify-content:center}}

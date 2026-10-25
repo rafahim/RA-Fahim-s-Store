@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/data/site";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 
 const nav: { label: string; href: string; external?: boolean }[] = [
   { label: "Home", href: "/" },

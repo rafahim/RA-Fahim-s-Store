@@ -62,7 +62,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       {s.slug === "domain" && (
         <section className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 pt-20">
           <h2 className={h2}>Find a name for your next idea.</h2>
-          <p className="mt-4 text-muted">Enter your preferred domain below. Final availability and price are confirmed before registration.</p>
+          <p className="mt-4 text-muted">Search any name below. If it is available, press Buy now and your order is ready to send.</p>
           <DomainSearch />
         </section>
       )}

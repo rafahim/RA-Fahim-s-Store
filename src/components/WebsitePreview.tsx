@@ -15,9 +15,10 @@ function liveScreenshotUrl(target: string) {
   api.searchParams.set("meta", "false");
   api.searchParams.set("embed", "screenshot.url");
   api.searchParams.set("screenshot.type", "jpeg");
-  api.searchParams.set("viewport.width", "1440");
-  api.searchParams.set("viewport.height", "900");
-  api.searchParams.set("waitForTimeout", "4500");
+  api.searchParams.set("viewport.width", "1100");
+  api.searchParams.set("viewport.height", "525");
+  api.searchParams.set("viewport.deviceScaleFactor", "2");
+  api.searchParams.set("waitForTimeout", "6000");
   return api.toString();
 }
 
@@ -45,7 +46,7 @@ export default function WebsitePreview({ url, name, fallbackImage }: { url: stri
           <span>{favicon && <img src={favicon} alt="" width={28} height={28} referrerPolicy="no-referrer" />}</span>
           <b>{name}</b><small>{host}</small>
         </div>}
-    {!liveFailed && <img ref={liveRef} className={`project-thumb-live${liveLoaded ? " is-loaded" : ""}`} src={liveScreenshotUrl(url)} alt={`${name} live website screenshot`} width={1440} height={900} loading="lazy" decoding="async" referrerPolicy="no-referrer" onLoad={() => setLiveLoaded(true)} onError={() => setLiveFailed(true)} />}
+    {!liveFailed && <img ref={liveRef} className={`project-thumb-live${liveLoaded ? " is-loaded" : ""}`} src={liveScreenshotUrl(url)} alt={`${name} live website screenshot`} width={2200} height={1050} loading="lazy" decoding="async" referrerPolicy="no-referrer" onLoad={() => setLiveLoaded(true)} onError={() => setLiveFailed(true)} />}
     <div className="project-thumb-bar">
       <span>{favicon && <img src={favicon} alt="" width={16} height={16} referrerPolicy="no-referrer" />}{liveLoaded ? "Homepage preview" : saved ? "Saved homepage preview" : "Homepage"}</span>
       <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${name} (opens in a new tab)`}>↗</a>
