@@ -10,14 +10,60 @@ export function normalizeDomain(input: string): { d: string; valid: boolean } {
   return { d, valid: d.length <= 253 && VALID.test(d) };
 }
 
-/** Asks the public RDAP registry whether the name is registered. 404 means it is not. */
-export async function checkDomain(d: string): Promise<DomainStatus> {
-  try {
-    const res = await fetch(`https://rdap.org/domain/${encodeURIComponent(d)}`, { signal: AbortSignal.timeout(8000) });
-    return res.status === 404 ? "free" : res.ok ? "taken" : "unknown";
-  } catch {
-    return "unknown";
+const TIMEOUT = 8000;
+const getJson = async (url: string, accept: string) => {
+  const res = await fetch(url, { headers: { accept }, signal: AbortSignal.timeout(TIMEOUT) });
+  return { status: res.status, ok: res.ok, json: await res.json().catch(() => null) as any };
+};
+
+// Which extensions have a public RDAP registry (IANA's list). Without one, the registry cannot confirm that a name is free.
+let rdapTlds: Promise<Set<string> | null> | undefined;
+function rdapSupported(tld: string): Promise<boolean | null> {
+  rdapTlds ??= getJson("https://data.iana.org/rdap/dns.json", "application/json")
+    .then((r) => (r.ok && Array.isArray(r.json?.services) ? new Set<string>(r.json.services.flatMap((x: [string[], string[]]) => x[0].map((t) => t.toLowerCase()))) : null))
+    .catch(() => null);
+  return rdapTlds.then((set) => (set ? set.has(tld) : null));
+}
+
+type Registry = "registered" | "unregistered" | "unsupported" | "error";
+/** Step 1: ask the registry (RDAP). 200 = registered, 404 from a real registry = not registered. */
+async function registryCheck(d: string): Promise<Registry> {
+  const tld = d.slice(d.lastIndexOf(".") + 1);
+  if ((await rdapSupported(tld)) === false) return "unsupported";
+  for (let i = 0; i < 2; i++) {
+    try {
+      const res = await fetch(`https://rdap.org/domain/${encodeURIComponent(d)}`, { headers: { accept: "application/rdap+json, application/json" }, signal: AbortSignal.timeout(TIMEOUT) });
+      if (res.ok) return "registered";
+      if (res.status === 404) return "unregistered";
+    } catch { /* try once more */ }
   }
+  return "error";
+}
+
+type Dns = "delegated" | "nxdomain" | "error";
+/** Step 2: ask public DNS (two independent resolvers). A name that has name servers is in use; NXDOMAIN means nothing is published for it. */
+async function dnsCheck(d: string): Promise<Dns> {
+  const urls = [`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(d)}&type=NS`, `https://dns.google/resolve?name=${encodeURIComponent(d)}&type=NS`];
+  const answers = await Promise.all(urls.map((u) => getJson(u, "application/dns-json").then((r): Dns => {
+    if (!r.ok || typeof r.json?.Status !== "number") return "error";
+    if (r.json.Status === 3) return "nxdomain";
+    return r.json.Status === 0 ? "delegated" : "error";
+  }).catch((): Dns => "error")));
+  if (answers.includes("delegated")) return "delegated";
+  return answers.every((a) => a === "nxdomain") ? "nxdomain" : "error";
+}
+
+/**
+ * Strict live check. A name is only called "free" when BOTH agree: the registry says it is not registered
+ * AND public DNS has nothing for it. If either says it is in use it is "taken". Anything else (a registry
+ * that is down, an extension without a public registry such as .bd, resolvers that disagree) is "unknown",
+ * so the visitor is never told a name is free on a guess.
+ */
+export async function checkDomain(d: string): Promise<DomainStatus> {
+  const [registry, dns] = await Promise.all([registryCheck(d), dnsCheck(d)]);
+  if (registry === "registered" || dns === "delegated") return "taken";
+  if (registry === "unregistered" && dns === "nxdomain") return "free";
+  return "unknown";
 }
 
 export const altExtensions = [".net", ".org", ".co", ".xyz", ".online", ".store"];

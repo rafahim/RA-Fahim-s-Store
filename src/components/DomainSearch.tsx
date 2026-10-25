@@ -99,10 +99,10 @@ export default function DomainSearch({ onSelect, selected, initial, onResult }: 
         <span>Try:</span>
         {popularExtensions.map((x) => <button key={x} type="button" disabled={r.s === "loading"} onClick={() => pickExt(x)}>{x}</button>)}
       </div>
-      <p id="domain-help" className="dom-help">Type a name, with or without an extension. No extension? We check .com for you. Availability can change before registration.</p>
+      <p id="domain-help" className="dom-help">Type a name, with or without an extension. No extension? We check .com for you. Names are checked against the live registry and DNS. Availability can still change before registration.</p>
 
       <div aria-live="polite" aria-atomic="true" className="mt-5 min-h-[3rem]">
-        {r.s === "loading" && <p className="text-sm font-medium text-muted">Checking the domain registry for {r.d}…</p>}
+        {r.s === "loading" && <p className="text-sm font-medium text-muted">Checking the registry and live DNS for {r.d}…</p>}
         {r.s === "invalid" && <p className="text-sm font-medium text-red-700">Enter a valid domain, such as yourbrand.com. Use letters, numbers and hyphens; each part must start and end with a letter or number.</p>}
 
         {r.s === "free" && (
@@ -110,7 +110,7 @@ export default function DomainSearch({ onSelect, selected, initial, onResult }: 
             <span className="dom-mark" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M4 10.5l4 4 8-9" /></svg></span>
             <div className="dom-body">
               <p className="dom-name">{r.d}</p>
-              <p className="dom-note">Good news, this name looks available.</p>
+              <p className="dom-note">Verified: not registered at the registry and nothing is published in DNS.</p>
             </div>
             {isSelected(r.d) ? <Added /> : <BuyBtn d={r.d} st="free" />}
           </div>
@@ -131,7 +131,7 @@ export default function DomainSearch({ onSelect, selected, initial, onResult }: 
             <span className="dom-mark" aria-hidden="true">?</span>
             <div className="dom-body">
               <p className="dom-name">{r.d}</p>
-              <p className="dom-note">Couldn&apos;t check this one automatically. Order it anyway and I&apos;ll confirm availability before anything starts.</p>
+              <p className="dom-note">Couldn&apos;t confirm this one with certainty (the registry or DNS didn&apos;t answer, or this extension has no public registry). Order it anyway and I&apos;ll confirm availability before anything starts.</p>
             </div>
             <div className="dom-actions">
               {isSelected(r.d) ? <Added /> : <BuyBtn d={r.d} st="unknown" />}
