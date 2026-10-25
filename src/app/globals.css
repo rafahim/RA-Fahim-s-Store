@@ -335,3 +335,4 @@ body{line-height:1.6}
 @media(max-width:767px){.pf-grid{grid-template-columns:1fr}.pf-cta{padding:26px 20px}}
 .pf-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:1023px){.pf-grid-3{grid-template-columns:1fr}}
+.sub-info{align-items:center}.sub-cta{display:grid;justify-items:center;gap:12px;padding:32px;border:1px solid var(--line);border-radius:22px;background:#fff;text-align:center}.sub-cta p{font-size:13px;color:var(--muted)}

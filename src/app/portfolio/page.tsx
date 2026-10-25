@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import WebsitePreview from "@/components/WebsitePreview";
 import Link from "next/link";
 import { projects, site } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
@@ -34,7 +34,7 @@ export default function PortfolioPage() {
         <ul className="pf-grid pf-grid-3">
           {shown.map((p) => (
             <li key={p.name} className="project-card">
-              {preview[p.name] && <Image src={preview[p.name]} alt={`${p.name} homepage`} width={1200} height={750} className="pf-shot" />}
+              <WebsitePreview url={p.href} name={p.name} fallbackImage={preview[p.name]} />
               <div className="pf-body">
                 <span className="ct-proj-cat">{p.category}</span>
                 <h3>{p.name}</h3>

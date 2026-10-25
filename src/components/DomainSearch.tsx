@@ -69,7 +69,7 @@ export default function DomainSearch({ onSelect, selected, initial, onResult }: 
     <button type="button" onClick={() => buy(d, st)} className={`btn ${small ? "px-5 py-2 text-[13px]" : "px-6 py-2.5 text-sm"}`}>Buy now <span aria-hidden="true">→</span></button>;
 
   return (
-    <div id="domain" className="domain-panel mt-8 max-w-3xl scroll-mt-24">
+    <div id="domain" className="domain-panel mt-8 w-full scroll-mt-24">
       <label htmlFor="domain-input" className="dom-label">Find your domain name</label>
       <form onSubmit={(e) => { e.preventDefault(); void run(q); }} className="dom-bar">
         <span className="dom-globe" aria-hidden="true">
