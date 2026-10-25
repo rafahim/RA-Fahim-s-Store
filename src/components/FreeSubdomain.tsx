@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { site } from "@/data/site";
 
 /** Domain page: explains the free subdomain. The details are collected on the checkout page. */
 export default function FreeSubdomain() {
@@ -9,9 +8,9 @@ export default function FreeSubdomain() {
         <div className="sub-copy">
           <span className="sub-tag">Free</span>
           <h2 className="font-display text-3xl font-semibold md:text-4xl">Get a free subdomain.</h2>
-          <p>Not ready to buy a domain yet? Get your own address like <b>yourname.{site.subdomainBase}</b> for your website, at no cost.</p>
+          <p>Not ready to buy a domain yet? Get a free subdomain for your website, at no cost.</p>
           <ul>
-            <li>Press the button and fill in your details and the name you want.</li>
+            <li>Press the button and fill in your details.</li>
             <li>It opens WhatsApp with everything already written. Just press send.</li>
             <li>I confirm the name is free and connect it to your website.</li>
           </ul>
